@@ -7,4 +7,4 @@ git clone %remotesource%
 set source=%CD%/%reponame%
 set destination=%appdata%\PrusaSlicer
 
-robocopy %source% %destination% /e /move
+robocopy %source% %destination% /mir /move
