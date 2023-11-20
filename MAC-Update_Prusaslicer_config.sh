@@ -2,6 +2,14 @@ repoauthor="anghelos"
 reponame="vanier-prusaslicer-config"
 remotesource="https://github.com/"${repoauthor}"/"${reponame}".git"
 
+# Check if git is installed and throw error if not
+if ! [ -x "$(command -v git)" ]; then
+  echo '----------
+  Error: git is not installed.
+  ----------' >&2
+  exit 1
+fi
+
 git clone $remotesource
 
 source=$reponame"/"
