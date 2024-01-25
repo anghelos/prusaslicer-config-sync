@@ -23,7 +23,7 @@ exit /b 0
 
 :giterror
 :: Throw error if git is not installed
-ECHO: & ECHO -------------- & ECHO: & ECHO You need to install git first! & ECHO: & ECHO -------------- &  ECHO: & PAUSE
+ECHO: & ECHO -------------- & ECHO: & ECHO You need to install git first! & ECHO: & ECHO You can download it here: https://git-scm.com/download/win & ECHO -------------- &  ECHO: & PAUSE
 
 exit /b 0
 
@@ -36,5 +36,3 @@ exit /b 0
 :repoauthormissing
 :: Throw error if repoauthor has not been set
 ECHO: & ECHO -------------- & ECHO: & ECHO You forgot to set your GitHub username in the script. & ECHO Please change the author and repository names and try again. & ECHO: & ECHO -------------- &  ECHO: & PAUSE
-
-exit /b 0
