@@ -23,9 +23,10 @@ This is currently used in a school's makerspace to ensure all the computers have
 ### 1. Install Git
 In order to run these scripts, Git must be installed on your computer. You can download it here: [https://git-scm.com/download/win](https://git-scm.com/download/win).
 
-You also need to setup a GitHub repository to upload your configuration.
+### 2. Set up a GitHub repository
+You need a GitHub repository to upload your configuration.
 
-### 2. Gitignore
+### 3. Gitignore
 Before running the Push script for the first time, it might be a good idea to set up a `.gitignore` file and put it in PrusaSlicer's AppData folder (a quick way to find it is to hit Ctrl+R and type `%appdata%\prusaslicer`). If you don't have one, the script will make a simple one:
 ```
 *.bak
@@ -45,7 +46,7 @@ You might want to exclude more files, for efficiency and to remove overhead. For
 /sla_print
 PrusaSlicerGcodeViewer*
 ```
-### 3. Change the user variables
+### 4. Change the user variables
 Make sure to set `repoauthor` and `reponame` to your own github usename and repository, or whoever's you might be using for the configuration. You can open the .bat file with any text editor to do that.
 
 ```bat
