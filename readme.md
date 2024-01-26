@@ -27,7 +27,7 @@ In order to run these scripts, Git must be installed on your computer. You can d
 You need a GitHub repository to upload your configuration.
 
 ### 3. Gitignore
-Before running the Push script for the first time, it might be a good idea to set up a `.gitignore` file and put it in PrusaSlicer's AppData folder (a quick way to find it is to hit Ctrl+R and type `%appdata%\prusaslicer`). If you don't have one, the script will make a simple one:
+Before running the Push script for the first time, it might be a good idea to set up a `.gitignore` file and put it in PrusaSlicer's AppData folder (a quick way to find it is to hit Win+R and type `%appdata%\prusaslicer`). If you don't have one, the script will make a simple one:
 ```
 *.bak
 /snapshots
