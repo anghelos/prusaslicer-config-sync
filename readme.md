@@ -67,7 +67,7 @@ You can automate the process by running the Update script on login.
 ## Limitations
 
 - This process transfers ALL PrusaSlicer settings, not only printer configurations. It also transfers things that don't make sense, like recently opened files, or default save file locations with broken filepaths.
-- Batch files only work on Windows. I've attempted writing up a shell script to be used on Mac, but couldn't test it properly. If you're on Linux, you could probably modify that one to make it work for you.
+- Batch files only work on Windows. I've attempted writing up a shell script to be used on Mac, but couldn't test it properly. If you're on Linux, you could probably modify that one to make it work for you, just change the path to PrusaSlicer's config files.
 
 
 ## Contributing

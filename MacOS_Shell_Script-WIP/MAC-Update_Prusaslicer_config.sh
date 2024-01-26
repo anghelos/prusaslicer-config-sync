@@ -5,8 +5,9 @@
 # This code is untested, as I figured I needed to install Developer tools on a mac computer to run shell scripts, which defeated my purpose.
 
 ############################
-repoauthor="anghelos"
-reponame="vanier-prusaslicer-config"
+repoauthor="YOUR GITHUB USERNAME"
+reponame="YOUR GITHUB REPOSITORY NAME"
+
 remotesource="https://github.com/"${repoauthor}"/"${reponame}".git"
 
 # Check if git is installed and throw error if not
