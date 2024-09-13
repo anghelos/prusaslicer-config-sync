@@ -1,4 +1,5 @@
 @echo off
+echo Updating Prusaslicer Config
 
 set repoauthor=YOUR GITHUB USERNAME
 set reponame=YOUR GITHUB REPOSITORY NAME
@@ -12,12 +13,12 @@ set remotesource=https://github.com/%repoauthor%/%reponame%.git
 
 :: Check if git is installed
 git version >nul 2>&1 || goto :giterror
-git clone %remotesource% || goto:othererror
+git clone %remotesource% --quiet || goto:othererror
 
 set source=%CD%/%reponame%
 set destination=%appdata%\PrusaSlicer
 
-robocopy %source% %destination% /mir /move /xd %source%\snapshots\
+robocopy %source% %destination% /mir /move /xd %source%\snapshots\ /NFL /NDL /NJH /NJS
 
 exit /b 0
 
