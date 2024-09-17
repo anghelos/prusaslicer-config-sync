@@ -18,7 +18,7 @@ git clone %remotesource% --quiet || goto:othererror
 set source=%CD%/%reponame%
 set destination=%appdata%\PrusaSlicer
 
-robocopy %source% %destination% /mir /move /xd %source%\snapshots\ /NFL /NDL /NJH /NJS
+robocopy %source% %destination% /mir /move /xd %source%\snapshots\
 
 exit /b 0
 
