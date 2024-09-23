@@ -1,4 +1,6 @@
+mode con: cols=60 lines=16
 @echo off
+echo:
 echo Updating Prusaslicer Config
 
 set repoauthor=YOUR GITHUB USERNAME
@@ -19,6 +21,9 @@ set source=%CD%/%reponame%
 set destination=%appdata%\PrusaSlicer
 
 robocopy %source% %destination% /mir /move /xd %source%\snapshots\
+
+ECHO: & ECHO -------------- & ECHO: & ECHO Prusaslicer Config Updated! & echo: & ECHO -------------- & echo:
+timeout /t 2
 
 exit /b 0
 
