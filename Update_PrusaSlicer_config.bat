@@ -23,7 +23,9 @@ set destination=%appdata%\PrusaSlicer
 robocopy %source% %destination% /mir /move /xd %source%\snapshots\
 
 ECHO: & ECHO -------------- & ECHO: & ECHO Prusaslicer Config Updated! & echo: & ECHO -------------- & echo:
-timeout /t 2
+echo Cleaning up...
+timeout /t 1 /nobreak >nul
+@RD /Q /S %reponame%
 
 exit /b 0
 
