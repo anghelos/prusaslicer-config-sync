@@ -3,8 +3,8 @@ mode con: cols=60 lines=16
 echo:
 echo Updating Prusaslicer Config
 
-set repoauthor=YOUR GITHUB USERNAME
-set reponame=YOUR GITHUB REPOSITORY NAME
+set repoauthor=anghelos
+set reponame=vanier-multimedia-prusaslicer-config
 
 :: Check if repoauthor has been set
 IF NOT "%repoauthor%"=="%repoauthor:YOUR GITHUB USERNAME=%" (
@@ -17,13 +17,14 @@ set remotesource=https://github.com/%repoauthor%/%reponame%.git
 git version >nul 2>&1 || goto :giterror
 git clone %remotesource% --quiet || goto:othererror
 
-set source=%CD%/%reponame%
-set destination=%appdata%\PrusaSlicer
+set source="%CD%\%reponame%"
+set destination="%appdata%\PrusaSlicer"
 
-robocopy %source% %destination% /mir /move /xd %source%\snapshots\
+robocopy %source% %destination% /mir /move  /NFL /NDL /NJH /NJS /np /xd %source%\snapshots\
 
 ECHO: & ECHO -------------- & ECHO: & ECHO Prusaslicer Config Updated! & echo: & ECHO -------------- & echo:
 timeout /t 2
+
 
 exit /b 0
 
