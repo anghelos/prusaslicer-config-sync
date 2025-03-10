@@ -3,8 +3,8 @@ mode con: cols=60 lines=16
 echo:
 echo Updating Prusaslicer Config
 
-set repoauthor=anghelos
-set reponame=vanier-multimedia-prusaslicer-config
+set repoauthor=YOUR GITHUB USERNAME
+set reponame=YOUR GITHUB REPOSITORY NAME
 
 :: Check if repoauthor has been set
 IF NOT "%repoauthor%"=="%repoauthor:YOUR GITHUB USERNAME=%" (
@@ -24,7 +24,6 @@ robocopy %source% %destination% /mir /move  /NFL /NDL /NJH /NJS /np /xd %source%
 
 ECHO: & ECHO -------------- & ECHO: & ECHO Prusaslicer Config Updated! & echo: & ECHO -------------- & echo:
 timeout /t 2
-
 
 exit /b 0
 
