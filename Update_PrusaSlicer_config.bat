@@ -28,15 +28,13 @@ set remotesource=https://github.com/%repoauthor%/%reponame%.git
 git version >nul 2>&1 || goto :giterror
 git clone %remotesource% --quiet || goto:othererror
 
-set source=%CD%/%reponame%
-set destination=%appdata%\PrusaSlicer
+set source="%CD%\%reponame%"
+set destination="%appdata%\PrusaSlicer"
 
-robocopy %source% %destination% /mir /move /xd %source%\snapshots\
+robocopy %source% %destination% /mir /move  /NFL /NDL /NJH /NJS /np /xd %source%\snapshots\
 echo:
 echo:
 ECHO: & ECHO -------------- & ECHO: & ECHO PrusaSlicer Config Updated! & echo: & ECHO -------------- & echo:
-
-
 echo:
 echo Starting PrusaSlicer
 echo:
