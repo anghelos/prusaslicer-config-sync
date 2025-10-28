@@ -1,5 +1,4 @@
 mode con: cols=60 lines=16
-mode con: cols=60 lines=16
 @echo off
 echo:
 Set "prusaslicer=prusa-slicer.exe"
@@ -61,3 +60,4 @@ exit /b 0
 :repoauthormissing
 :: Throw error if repoauthor has not been set
 ECHO: & ECHO -------------- & ECHO: & ECHO You forgot to set your GitHub username in the script. & ECHO Please change the author and repository names and try again. & ECHO: & ECHO -------------- &  ECHO: & PAUSE
+
