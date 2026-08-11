@@ -13,8 +13,8 @@ if not errorlevel 1 (taskkill /IM prusa-slicer.exe /F)
 echo:
 echo Updating Prusaslicer Config
 
-set repoauthor=YOUR GITHUB USERNAME
-set reponame=YOUR GITHUB REPOSITORY NAME
+set repoauthor=anghelos
+set reponame=vanier-prusaslicer-config
 
 :: Check if repoauthor has been set
 IF NOT "%repoauthor%"=="%repoauthor:YOUR GITHUB USERNAME=%" (
