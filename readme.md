@@ -1,3 +1,5 @@
+> This branch is specific to the Vanier Makerspace
+
 # PrusaSlicer AppData Sync
 
 ## Description
