@@ -1,63 +1,86 @@
-mode con: cols=60 lines=16
 @echo off
-echo:
-Set "prusaslicer=prusa-slicer.exe"
-tasklist /NH /FI "imagename eq %prusaslicer%" 2>nul |find /i "%prusaslicer%" >nul
-If errorlevel 1 (goto :update)
-Echo PrusaSlicer is running. Please close it or press any key to kill it.
-PAUSE
-tasklist /NH /FI "imagename eq %prusaslicer%" 2>nul |find /i "%prusaslicer%" >nul
-if not errorlevel 1 (taskkill /IM prusa-slicer.exe /F)
+setlocal
+mode con: cols=60 lines=16
 
-:update
-echo:
-echo Updating Prusaslicer Config
+set "prusaslicer=prusa-slicer.exe"
+set "repoauthor=YOUR GITHUB USERNAME"
+set "reponame=YOUR GITHUB REPOSITORY NAME"
 
-set repoauthor=YOUR GITHUB USERNAME
-set reponame=YOUR GITHUB REPOSITORY NAME
+:: Check if repo author and name have been modified
+if "%repoauthor%"=="YOUR GITHUB USERNAME" goto :repoauthormissing
+if "%reponame%"=="YOUR GITHUB REPOSITORY NAME" goto :repoauthormissing
 
-:: Check if repoauthor has been set
-IF NOT "%repoauthor%"=="%repoauthor:YOUR GITHUB USERNAME=%" (
-    goto:repoauthormissing
+:: Verify Git installation
+git --version >nul 2>&1 || goto :giterror
+
+:: Close PrusaSlicer if running
+tasklist /fi "imagename eq %prusaslicer%" 2>nul | find /i "%prusaslicer%" >nul
+if not errorlevel 1 (
+    echo:
+    echo PrusaSlicer is running. Close it or press any key to kill it.
+    pause >nul
+    taskkill /f /im "%prusaslicer%" >nul 2>&1
 )
 
-set remotesource=https://github.com/%repoauthor%/%reponame%.git
+:update
+cls
+echo:
+echo Updating PrusaSlicer Config...
 
-:: Check if git is installed
-git version >nul 2>&1 || goto :giterror
-git clone %remotesource% --quiet || goto:othererror
+set "remotesource=https://github.com/%repoauthor%/%reponame%.git"
+set "source=%CD%\%reponame%"
+set "destination=%APPDATA%\PrusaSlicer"
 
-set source="%CD%\%reponame%"
-set destination="%appdata%\PrusaSlicer"
+:: If repo folder already exists, remove it before cloning
+if exist "%source%" rd /s /q "%source%"
 
-robocopy %source% %destination% /mir /move  /NFL /NDL /NJH /NJS /np /xd %source%\snapshots\
-echo:
-echo:
-ECHO: & ECHO -------------- & ECHO: & ECHO PrusaSlicer Config Updated! & echo: & ECHO -------------- & echo:
-echo:
-echo Starting PrusaSlicer
-echo:
-echo:
-echo:
-start "" /b "C:/Program Files/Prusa3D/PrusaSlicer/prusa-slicer.exe"
+git clone "%remotesource%" "%source%" --quiet || goto :othererror
 
-timeout /t 3
+robocopy "%source%" "%destination%" /mir /move /nfl /ndl /njh /njs /np /xd "%source%\snapshots" >nul
 
+:: Clean leftovers
+if exist "%source%" rd /s /q "%source%" >nul 2>&1
+
+echo:
+echo ----------------------------------------------------
+echo PrusaSlicer Config Updated!
+echo ----------------------------------------------------
+echo:
+echo Starting PrusaSlicer...
+
+start "" "C:\Program Files\Prusa3D\PrusaSlicer\prusa-slicer.exe"
+timeout /t 3 >nul
 exit /b 0
 
 :giterror
-:: Throw error if git is not installed
-ECHO: & ECHO -------------- & ECHO: & ECHO You need to install git first! & ECHO: & ECHO You can download it here: https://git-scm.com/download/win & ECHO -------------- &  ECHO: & PAUSE
-
-exit /b 0
-
-:othererror
-:: Throw error if something else went wrong
-ECHO: & ECHO -------------- & ECHO: & ECHO Something went wrong! See error above. & ECHO: & ECHO -------------- &  ECHO: & PAUSE
-
-exit /b 0
+cls
+echo:
+echo ----------------------------------------------------
+echo You need to install Git first!
+echo Download: https://git-scm.com/download/win
+echo ----------------------------------------------------
+echo:
+pause
+exit /b 1
 
 :repoauthormissing
-:: Throw error if repoauthor has not been set
-ECHO: & ECHO -------------- & ECHO: & ECHO You forgot to set your GitHub username in the script. & ECHO Please change the author and repository names and try again. & ECHO: & ECHO -------------- &  ECHO: & PAUSE
+cls
+echo:
+echo ----------------------------------------------------
+echo You forgot to set your GitHub username in the script.
+echo Please change the author and repository names and try again.
+echo ----------------------------------------------------
+echo:
+pause
+exit /b 1
 
+:othererror
+cls
+echo:
+echo ----------------------------------------------------
+echo An error occurred during git clone.
+echo Check network connection or repository visibility.
+echo ----------------------------------------------------
+echo:
+pause
+exit /b 1
